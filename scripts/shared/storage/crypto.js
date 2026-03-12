@@ -7,7 +7,22 @@ const IV_BYTES = 12;
 const TAG_BYTES = 16;
 
 function getMasterKey() {
-  return process.env.BILLIONS_NETWORK_MASTER_KMS_KEY || null;
+  const rawKey = process.env.BILLIONS_NETWORK_MASTER_KMS_KEY;
+
+  if (typeof rawKey !== "string") {
+    return null;
+  }
+
+  const trimmedKey = rawKey.trim();
+
+  // Reject whitespace-only or too-short keys to avoid weak/blank-looking master keys.
+  // Returning null keeps behavior consistent with the "no key configured" case.
+  const MIN_MASTER_KEY_LENGTH = 16;
+  if (trimmedKey.length < MIN_MASTER_KEY_LENGTH) {
+    return null;
+  }
+
+  return trimmedKey;
 }
 
 function deriveAesKey(masterKeyString) {
