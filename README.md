@@ -106,7 +106,7 @@ Set the environment variable `BILLIONS_NETWORK_MASTER_KMS_KEY` to enable AES-256
 
 **`kms.json` entry format**
 
-Each entry in the array is versioned. The `alias` is always stored in plain text — only the `key` value is encrypted:
+Each entry in the array is versioned. The `alias` is always stored in plaintext — only the `key` value is encrypted:
 
 ```json
 [
@@ -188,7 +188,7 @@ Prompt injection and arbitrary code execution are structurally impossible: the e
   All network calls are directed to legitimate DID resolvers (resolver.privado.id) or the project's own infrastructure (billions.network).
   These network calls cannot exfiltrate signed attestations or identity data to third-party services by skill design as they do not pass them. This is possible only through explicit action from the user side with consent. Also attestation contains only publicly verifiable information.
 - No external binary other than `openclaw` is invoked.
-- External URLs or verification links produced by the scripts are delivered to the user as a plain text message via `openclaw message send`. The agent has no ability to follow, fetch, open, or interact with those URLs in any way - it only forwards the string to the user.
+- External URLs or verification links produced by the scripts are delivered to the user as a plaintext message via `openclaw message send`. The agent has no ability to follow, fetch, open, or interact with those URLs in any way - it only forwards the string to the user.
 
 ### Openclaw exec policy
 
